@@ -1,16 +1,19 @@
 package br.com.kakobotasso.jsonconsumer.views;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.Toast;
 
 import br.com.kakobotasso.jsonconsumer.R;
-import br.com.kakobotasso.jsonconsumer.models.Usuario;
-import br.com.kakobotasso.jsonconsumer.views.adapters.ListaUsuariosAdapter;
+import br.com.kakobotasso.jsonconsumer.models.DataContainer;
+import br.com.kakobotasso.jsonconsumer.network.DataInterface;
+import br.com.kakobotasso.jsonconsumer.views.adapters.ListaDataAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,18 +22,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView listaUsuarios = (RecyclerView) findViewById(R.id.lista_usuarios);
+        final RecyclerView listaUsuarios = (RecyclerView) findViewById(R.id.lista_usuarios);
         listaUsuarios.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listaUsuarios.setLayoutManager(linearLayoutManager);
 
-        List<Usuario> usuarios = new ArrayList<>();
-        usuarios.add(new Usuario("1234", "Afonso", "4321"));
-        usuarios.add(new Usuario("4567", "Alana", "5342"));
-        usuarios.add(new Usuario("7890", "Mancini", "7685"));
+        DataInterface dataInterface = DataInterface.retrofit.create(DataInterface.class);
+        Call<DataContainer> chamada = dataInterface.getData();
+        final Context that = this;
 
-        ListaUsuariosAdapter adapter = new ListaUsuariosAdapter(usuarios);
-        listaUsuarios.setAdapter(adapter);
+        chamada.enqueue(new Callback<DataContainer>() {
+            @Override
+            public void onResponse(Call<DataContainer> call, Response<DataContainer> response) {
+                ListaDataAdapter adapter = new ListaDataAdapter(response.body().getDataModelList());
+                listaUsuarios.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<DataContainer> call, Throwable t) {
+                Toast.makeText(that, "Não foi possivel conectar à API", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 }

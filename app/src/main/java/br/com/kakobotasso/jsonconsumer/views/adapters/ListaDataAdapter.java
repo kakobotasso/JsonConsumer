@@ -9,45 +9,45 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.kakobotasso.jsonconsumer.R;
-import br.com.kakobotasso.jsonconsumer.models.Usuario;
+import br.com.kakobotasso.jsonconsumer.models.DataModel;
 
 /**
  * Created by kakobotasso on 8/21/16.
  */
-public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdapter.UsuarioViewHolder> {
-    private List<Usuario> usuariosList;
+public class ListaDataAdapter extends RecyclerView.Adapter<ListaDataAdapter.DataModelViewHolder> {
+    private List<DataModel> dataModelList;
 
-    public ListaUsuariosAdapter(List<Usuario> usuariosList){
-        this.usuariosList = usuariosList;
+    public ListaDataAdapter(List<DataModel> dataModelList){
+        this.dataModelList = dataModelList;
     }
 
     @Override
-    public UsuarioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public  DataModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.cardview_usuario, parent, false);
-        return new UsuarioViewHolder(itemView);
+        return new  DataModelViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(UsuarioViewHolder holder, int position) {
-        Usuario usuario = usuariosList.get(position);
-        holder.idUsuario.setText("ID: " + usuario.getId());
-        holder.nomeUsuario.setText("Name: " + usuario.getNome());
-        holder.pwdUsuario.setText("Pwd: " + usuario.getPwd());
+    public void onBindViewHolder(DataModelViewHolder holder, int position) {
+        DataModel dataModel = dataModelList.get(position);
+        holder.idUsuario.setText("ID: " + dataModel.getId());
+        holder.nomeUsuario.setText("Name: " + dataModel.getName());
+        holder.pwdUsuario.setText("Pwd: " + dataModel.getPwd());
     }
 
     @Override
     public int getItemCount() {
-        return usuariosList.size();
+        return dataModelList.size();
     }
 
-    public static class UsuarioViewHolder extends RecyclerView.ViewHolder{
+    public static class  DataModelViewHolder extends RecyclerView.ViewHolder{
         private TextView idUsuario;
         private TextView nomeUsuario;
         private TextView pwdUsuario;
 
-        public UsuarioViewHolder(View itemView) {
+        public DataModelViewHolder(View itemView) {
             super(itemView);
             this.idUsuario = (TextView) itemView.findViewById(R.id.id_usuario);
             this.nomeUsuario = (TextView) itemView.findViewById(R.id.nome_usuario);
