@@ -13,25 +13,16 @@
         android:padding="10dp"
         android:layout_marginBottom="10dp">
 
-        <TextView
+        <TextView style="@style/TextViewCardView"
             android:id="@+id/id_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/card_view_text"
             />
 
-        <TextView
+        <TextView style="@style/TextViewCardView"
             android:id="@+id/nome_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/card_view_text"
             />
 
-        <TextView
+        <TextView style="@style/TextViewCardView"
             android:id="@+id/pwd_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/card_view_text"
             />
 
     </LinearLayout>
