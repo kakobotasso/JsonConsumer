@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Json Consumer</string>
+    <string name="erro_api">Ocorreu um erro. Tente novamente mais tarde.</string>
 </resources>

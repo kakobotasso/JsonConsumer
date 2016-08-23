@@ -15,8 +15,4 @@ public class DataContainer {
     public List<DataModel> getDataModelList() {
         return dataModelList;
     }
-
-    public void setDataModelList(List<DataModel> dataModelList) {
-        this.dataModelList = dataModelList;
-    }
 }

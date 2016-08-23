@@ -14,6 +14,8 @@ import retrofit2.http.GET;
  */
 
 public interface DataInterface {
+    String url = "https://s3-sa-east-1.amazonaws.com";
+
     @GET("/pontotel-docs/data.json")
     Call<DataContainer> getData();
 
@@ -22,7 +24,7 @@ public interface DataInterface {
             .create();
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://s3-sa-east-1.amazonaws.com")
+            .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 }
